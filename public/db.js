@@ -15,6 +15,7 @@ request.onupgradeneeded = function (event) {
     db = event.target.result;
     //set up to check if app is online before reading from db 
     if (navigator.onLine) {
+        console.log('Backend onlinee!')
       checkDatabase();
     }
   };
@@ -24,3 +25,14 @@ request.onupgradeneeded = function (event) {
     console.log(`Woops! ${e.target.errorCode}`);
   };
 
+  const saveRecord = (record) => {
+    console.log('Save record invoked');
+    // Create a transaction on the BudgetStore db with readwrite access
+    const transaction = db.transaction(['BudgetStore'], 'readwrite');
+  
+    // Access your BudgetStore object store
+    const store = transaction.objectStore('BudgetStore');
+  
+    // Add record to your store with add method.
+    store.add(record);
+  };
