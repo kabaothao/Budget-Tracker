@@ -36,3 +36,12 @@ request.onupgradeneeded = function (event) {
     // Add record to your store with add method.
     store.add(record);
   };
+  
+  function checkDatabase() {
+    // open a transaction on your pending db
+    let transaction = db.transaction(['BudgetStore'], 'readwrite');
+    // access your pending object store
+    const store = transaction.objectStore('BudgetStore');
+    // get all records from store and set to a variable
+    const getAll = store.getAll();
+  }
