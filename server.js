@@ -25,7 +25,7 @@ mongoose.connect("mongodb://localhost/budgettracker", {
 });
 
 // routes
-app.use(require("./api"));
+app.use(require("./routes/api"));
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
