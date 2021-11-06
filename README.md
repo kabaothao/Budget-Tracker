@@ -1,7 +1,7 @@
 # Budget-Tracker
 
 > Outline a brief description of your project.
-- Live Demo [_here_](workout-tracker-dev.herokuapp.com/). 
+- Live Demo [_here_](https://budgettracker-app.herokuapp.com/). 
 
 
 > <!-- If you have the project hosted somewhere, include the link here. -->
