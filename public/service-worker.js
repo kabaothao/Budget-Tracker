@@ -14,6 +14,7 @@ const FILES_TO_CACHE = [
     "/db.js"
 ];
 
+
 //TODO: set up to install. add event listener function
 self.addEventListener("install", function (evt) {
     evt.waitUntil(

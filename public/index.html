@@ -49,5 +49,15 @@
   <script src="index.js"></script>
   <script src="db.js"></script>
   <!-- TODO: add script to confirm youer service worker file is working-->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then((reg) => {
+            console.log('We found your service worker file!', reg);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
