@@ -8,10 +8,10 @@ const FILES_TO_CACHE = [
     "/icons/icon-192x192.png",
     "/icons/icon-512x512.png",
     "index.js",
-    "/index.html",
+    "index.html",
     "styles.css",
-    "/manifest.json",
-    "/db.js"
+    "manifest.json",
+    "db.js"
 ];
 
 
