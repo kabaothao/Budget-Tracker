@@ -42,8 +42,7 @@
 
 ## Screenshots
 
-![Example screenshot](https://github.com/kabaothao/Workout-Tracker/blob/main/assets/imageone.PNG)
-![Example screenshot](https://github.com/kabaothao/Workout-Tracker/blob/main/assets/imagetwo.PNG)
+![Example screenshot](https://github.com/kabaothao/Budget-Tracker/blob/main/assets/imageone.PNG)
 
 <!-- If you have screenshots you'd like to share, include them here. -->
 
