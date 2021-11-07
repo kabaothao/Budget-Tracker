@@ -1,5 +1,6 @@
 //TODO: setup database
 let db;
+let budget;
   //1 means it is Version 1. It is saying it is a version for what it needs to be store.
     // create a new db request for a "BudgetDB" database.
 const request = indexedDB.open("budget", 1);
