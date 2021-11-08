@@ -28,6 +28,7 @@ request.onupgradeneeded = function (event) {
         console.log(`Woops! ${e.target.errorCode}`);
   };
 
+  
   const saveRecord = (record) => {
         console.log('Save record invoked');
         // Create a transaction on the Budget db with readwrite access
