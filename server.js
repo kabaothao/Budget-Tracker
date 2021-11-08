@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const compression = require("compression");
 require('dotenv').config();
 
-const PORT = 4000;
+const PORT = 3000;
 
 const app = express();
 
