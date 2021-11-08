@@ -20,7 +20,9 @@ console.log("==> ENV VARS: \n", process.env.MONGODB_URI)
 
 mongoose.connect("mongodb://localhost/budget", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 // routes
