@@ -2,7 +2,6 @@
 
 > Outline a brief description of your project.
 - Live Demo [_here_](https://budgettracker-app.herokuapp.com/). 
-- Live Demo [_here_](https://kabaothao.github.io/Budget-Tracker/). 
 
 
 
