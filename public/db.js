@@ -10,7 +10,7 @@ const request = indexedDB.open("budget", 1);
 request.onupgradeneeded = function (event) {
     // create object store called "Budget" and set autoIncrement to true
         const db = event.target.result;
-        db.createObjectStore("Budget", {autoIncrement: true});
+        db.createObjectStore("budget", {autoIncrement: true});
   };
 
   request.onsuccess = function (event) {
@@ -32,10 +32,10 @@ request.onupgradeneeded = function (event) {
   const saveRecord = (record) => {
         console.log('Save record invoked');
         // Create a transaction on the Budget db with readwrite access
-        const transaction = db.transaction(['Budget'], 'readwrite');
+        const transaction = db.transaction(['budget'], 'readwrite');
     
         // Access your Budget object store
-        const store = transaction.objectStore('Budget');
+        const store = transaction.objectStore('budget');
     
         // Add record to your store with add method.
         store.add(record);
@@ -43,9 +43,9 @@ request.onupgradeneeded = function (event) {
   
   function checkDatabase() {
     // open a transaction on your pending db
-    let transaction = db.transaction(['Budget'], 'readwrite');
+    let transaction = db.transaction(['budget'], 'readwrite');
     // access your pending object store
-    const store = transaction.objectStore('Budget');
+    const store = transaction.objectStore('budget');
     // get all records from store and set to a variable
     const getAll = store.getAll();
 
@@ -67,10 +67,10 @@ request.onupgradeneeded = function (event) {
                     // If our returned response is not empty
                         if (res.length !== 0) {
                         // Open another transaction to BudgetS with the ability to read and write
-                        transaction = db.transaction(['Budget'], 'readwrite');
+                        transaction = db.transaction(['budget'], 'readwrite');
 
                         // Assign the current store to a variable
-                        const currentStore = transaction.objectStore('Budget');
+                        const currentStore = transaction.objectStore('budget');
 
                         // Clear existing entries because our bulk add was successful
                         currentStore.clear();
