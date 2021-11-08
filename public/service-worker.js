@@ -1,76 +1,78 @@
-const FILES_TO_CACHE = [
-  "/",
-  "/manifest.json",
-  "/db.js",
-  "/index.html",
-  "/index.js",
-  "/styles.css",
-  "/assets/icons/icon-192x192.png",
-  "/assets/icons/icon-512x512.png",
-];
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
-// install
-self.addEventListener('install', function(evt) {
-  evt.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log('Your files were pre-cached successfully!');
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );
-  // tell the browser to activate this service worker immediately once it
-  // has finished installing
-  self.skipWaiting();
-});
+
+//TODO: set up const files to cache
+
+const FILES_TO_CACHE = [
+    "/",
+    "/icons/icon-192x192.png",
+    "/icons/icon-512x512.png",
+    "/index.js",
+    "/index.html",
+    "/styles.css",
+    "/manifest.json",
+    "/db.js"
+];
 
 
-// activate
-self.addEventListener("activate", function(evt) {
-  evt.waitUntil(
-    caches.keys().then(keyList => {
-      return Promise.all(
-        keyList.map(key => {
-          if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
-            console.log("Removing old cache data", key);
-            return caches.delete(key);
-          }
+//TODO: set up to install. add event listener function
+self.addEventListener("install", function (evt) {
+    evt.waitUntil(
+        caches.open(CACHE_NAME).then(cache => {
+            console.log("Your files were pre-cached successfully!");
+            return cache.addAll(FILES_TO_CACHE);
         })
-      );
-    })
-  );
-
-  self.clients.claim();
-});
-
-// fetch
-self.addEventListener("fetch", function(evt) {
-  if (evt.request.url.includes("/api/")) {
-    evt.respondWith(
-      caches.open(DATA_CACHE_NAME).then(cache => {
-        return fetch(evt.request)
-          .then(response => {
-            // If the response was good, clone it and store it in the cache.
-            if (response.status === 200) {
-              cache.put(evt.request.url, response.clone());
-            }
-
-            return response;
-          })
-          .catch(err => {
-            // Network request failed, try to get it from the cache.
-            return cache.match(evt.request);
-          });
-      }).catch(err => console.log(err))
     );
 
-    return;
-  }
+    self.skipWaiting();
+});
 
-  evt.respondWith(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.match(evt.request).then(response => {
-        return response || fetch(evt.request);
-      });
-    })
-  );
+self.addEventListener("activate", function (evt) {
+    evt.waitUntil(
+        caches.keys().then(keyList => {
+            return Promise.all(
+                keyList.map(key => {
+                    if (key !== CACHE_NAME && key !== DATA_CACHE_NAME) {
+                        console.log("Removing old cache data", key);
+                        return caches.delete(key);
+                    }
+                })
+            );
+        })
+    );
+
+    self.clients.claim();
+});
+
+//TODO: set up fetch function 
+self.addEventListener("fetch", function (evt) {
+    // cache successful requests to the API
+    if (evt.request.url.includes("/api/")) {
+        evt.respondWith(
+            caches.open(DATA_CACHE_NAME).then(cache => {
+                return fetch(evt.request)
+                    .then(response => {
+                        // If the response was good, clone it and store it in the cache.
+                        if (response.status === 200) {
+                            cache.put(evt.request.url, response.clone());
+                        }
+
+                        return response;
+                    })
+                    .catch(err => {
+                        // Network request failed, try to get it from the cache.
+                        return cache.match(evt.request);
+                    });
+            }).catch(err => console.log(err))
+        );
+
+        return;
+    }
+
+    //building offline-first
+    evt.respondWith(
+        caches.match(evt.request).then(function (response) {
+            return response || fetch(evt.request);
+        })
+    );
 });
