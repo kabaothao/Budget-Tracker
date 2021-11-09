@@ -18,14 +18,25 @@ app.use(express.json());
 app.use(express.static("public"));
 
 console.log("==> ENV VARS: \n", process.env.MONGODB_URI)
-const dbString = process.env.MONGODB_URI || "mongodb://localhost/budget";
 
-mongoose.connect(dbString, {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workout',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
+
+// const dbString = process.env.MONGODB_URI || "mongodb://localhost/budget";
+
+// mongoose.connect(dbString, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+//   useFindAndModify: false
+// });
 
 // routes
 app.use(require("./routes/api.js"));
